@@ -1,0 +1,36 @@
+NAME="gstreamer1.0-plugins-base"
+VERSION=0.11.99
+RELEASE=1
+CATEGORY="Audio Video"
+SUMMARY="GStreamer 1.0 Base Plug-ins"
+DESCRIPTION="GStreamer Base Plug-ins is a well-groomed and well-maintained
+collection of GStreamer plug-ins and elements, spanning the range of possible
+types of elements one would want to write for GStreamer. It also contains
+helper libraries and base classes useful for writing elements. A wide range
+of video and audio decoders, encoders, and filters are included."
+GST_PLUGINS_ENABLE="ogg pango theora vorbis ximage"
+GST_PLUGINS_DISABLE="alsa cdparanoia libvisual xvideo"
+inherit gst-plugins
+
+PKG_NAMES="${PN} libgstinterfaces1.0_0 libgstinterfaces1.0-devel girepository-GstInterfaces1.0"
+libgstinterfaces1_0_0_CONTENTS="usr/bin/cyggst*-1.0-0.dll"
+libgstinterfaces1_0_devel_CONTENTS="usr/include/ usr/lib/lib* usr/lib/pkgconfig/
+                                    usr/share/gtk-doc/html/${ORIG_PN}-libs-1.0/"
+girepository_GstInterfaces1_0_CONTENTS="usr/*/gir*-1.0/Gst*-1.0.*"
+
+for ext in ${GST_PLUGINS_ENABLE}
+do
+	PKG_NAMES+=" gstreamer1.0-plugins-${ext}"
+	declare gstreamer1_0_plugins_${ext}_CONTENTS="${GST_PLUGINDIR#/}/*gst${ext//_/}*"
+	declare gstreamer1_0_plugins_${ext}_SUMMARY="GStreamer 1.0 ${ext} plugin"
+	gstreamer1_0_plugins_base_CONTENTS+=" --exclude=*gst${ext//_/}*"
+done
+unset ext
+
+gstreamer1_0_plugins_base_CONTENTS+=" usr/bin/gst* usr/lib/gstreamer-1.0/
+                                      usr/share/doc/ usr/share/gtk-doc/html/${ORIG_PN}-plugins-1.0/
+                                      usr/share/${ORIG_PN}/ usr/share/locale/ usr/share/man/"
+gstreamer1_0_plugins_theora_REQUIRES="gstreamer1.0-plugins-ogg"
+gstreamer1_0_plugins_vorbis_REQUIRES="gstreamer1.0-plugins-ogg"
+
+KEEP_LA_FILES="none"
