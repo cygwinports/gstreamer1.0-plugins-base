@@ -3,7 +3,7 @@ GST_PLUGINS_DISABLE="alsa cdparanoia libvisual xvideo"
 inherit gst-plugins
 
 NAME="gstreamer1.0-plugins-base"
-VERSION=1.0.5
+VERSION=1.0.7
 RELEASE=1
 CATEGORY="Audio Video"
 SUMMARY="GStreamer 1.0 Base Plug-ins"
