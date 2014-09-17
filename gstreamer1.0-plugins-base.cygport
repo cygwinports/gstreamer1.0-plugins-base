@@ -15,6 +15,7 @@ of video and audio decoders, encoders, and filters are included."
 
 PKG_NAMES="${NAME} ${NAME}-doc libgstinterfaces1.0_0 libgstinterfaces1.0-devel girepository-GstInterfaces1.0"
 libgstinterfaces1_0_0_CATEGORY="Libs"
+libgstinterfaces1_0_o_REQUIRES="iso-codes"  # libgsttag
 libgstinterfaces1_0_0_CONTENTS="usr/bin/cyggst*-1.0-0.dll"
 libgstinterfaces1_0_devel_CATEGORY="Libs"
 libgstinterfaces1_0_devel_CONTENTS="usr/include/ usr/lib/lib* usr/lib/pkgconfig/"
