@@ -1,10 +1,10 @@
-GST_PLUGINS_ENABLE="ogg pango theora vorbis ximage"
-GST_PLUGINS_DISABLE="alsa cdparanoia libvisual xvideo"
+GST_PLUGINS_ENABLE="cdparanoia ogg pango theora vorbis ximage"
+GST_PLUGINS_DISABLE="alsa libvisual xvideo"
 inherit gst-plugins
 
 NAME="gstreamer1.0-plugins-base"
 VERSION=1.4.5
-RELEASE=1
+RELEASE=2
 CATEGORY="Audio Video"
 SUMMARY="GStreamer 1.0 Base Plug-ins"
 DESCRIPTION="GStreamer Base Plug-ins is a well-groomed and well-maintained
@@ -12,6 +12,8 @@ collection of GStreamer plug-ins and elements, spanning the range of possible
 types of elements one would want to write for GStreamer. It also contains
 helper libraries and base classes useful for writing elements. A wide range
 of video and audio decoders, encoders, and filters are included."
+
+PATCH_URI="1.4.5-libcdio_paranoia.patch"
 
 PKG_NAMES="${NAME} ${NAME}-doc libgstinterfaces1.0_0 libgstinterfaces1.0-devel girepository-GstInterfaces1.0"
 libgstinterfaces1_0_0_CATEGORY="Libs"
@@ -24,10 +26,7 @@ girepository_GstInterfaces1_0_CONTENTS="usr/*/gir*-1.0/Gst*-1.0.*"
 
 for ext in ${GST_PLUGINS_ENABLE}
 do
-	PKG_NAMES+=" gstreamer1.0-plugins-${ext}"
-	declare gstreamer1_0_plugins_${ext}_CONTENTS="${GST_PLUGINDIR#/}/*gst${ext//_/}*"
-	declare gstreamer1_0_plugins_${ext}_SUMMARY="GStreamer 1.0 ${ext} plugin"
-	gstreamer1_0_plugins_base_CONTENTS+=" --exclude=*gst${ext//_/}*"
+	gstreamer1_0_plugins_base_OBSOLETES+=" gstreamer1.0-plugins-${ext}"
 done
 unset ext
 
@@ -36,5 +35,3 @@ gstreamer1_0_plugins_base_CONTENTS+=" usr/bin/gst* usr/lib/gstreamer-1.0/
                                       usr/share/${ORIG_PN}/ usr/share/locale/ usr/share/man/"
 gstreamer1_0_plugins_base_doc_CATEGORY="Doc"
 gstreamer1_0_plugins_base_doc_CONTENTS="usr/share/gtk-doc/"
-gstreamer1_0_plugins_theora_REQUIRES="gstreamer1.0-plugins-ogg"
-gstreamer1_0_plugins_vorbis_REQUIRES="gstreamer1.0-plugins-ogg"
