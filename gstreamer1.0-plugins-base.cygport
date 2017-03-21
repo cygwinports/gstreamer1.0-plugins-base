@@ -1,9 +1,9 @@
-GST_PLUGINS_ENABLE="cdparanoia ogg pango theora vorbis ximage"
+GST_PLUGINS_ENABLE="cdparanoia ogg opus pango theora vorbis ximage"
 GST_PLUGINS_DISABLE="alsa libvisual xvideo"
 inherit gst-plugins
 
 NAME="gstreamer1.0-plugins-base"
-VERSION=1.6.4
+VERSION=1.10.4
 RELEASE=1
 CATEGORY="Audio Video"
 SUMMARY="GStreamer 1.0 Base Plug-ins"
@@ -17,7 +17,7 @@ PATCH_URI="1.4.5-libcdio_paranoia.patch"
 
 PKG_NAMES="${NAME} ${NAME}-doc libgstinterfaces1.0_0 libgstinterfaces1.0-devel girepository-GstInterfaces1.0"
 libgstinterfaces1_0_0_CATEGORY="Libs"
-libgstinterfaces1_0_o_REQUIRES="iso-codes"  # libgsttag
+libgstinterfaces1_0_0_REQUIRES="iso-codes"  # libgsttag
 libgstinterfaces1_0_0_CONTENTS="usr/bin/cyggst*-1.0-0.dll"
 libgstinterfaces1_0_devel_CATEGORY="Libs"
 libgstinterfaces1_0_devel_CONTENTS="usr/include/ usr/lib/lib* usr/lib/pkgconfig/"
